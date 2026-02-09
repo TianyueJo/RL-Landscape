@@ -1,0 +1,29 @@
+# NOTE:
+# - We pin NumPy < 2 to avoid binary-compat issues with compiled wheels
+#   (e.g., matplotlib / scikit-learn) in some environments.
+# - This file is intended for the `control/` training/evaluation/visualization scripts.
+
+# Core
+numpy==1.26.4
+setuptools==80.9.0
+wheel==0.45.1
+uv==0.8.10
+
+# RL / training
+torch>=2.2.0
+gymnasium[mujoco]==0.29.1
+stable-baselines3==2.1.0
+PyYAML>=6.0.1
+tqdm>=4.66.0
+
+# Analysis / plotting
+matplotlib>=3.8.0
+scikit-learn>=1.4.0
+scipy>=1.11.0
+plotly>=5.20.0
+kaleido>=0.2.1
+networkx>=3.2
+imageio>=2.34.0
+
+# Optional (only needed for some pufferlib environments/tools):
+# opencv-python

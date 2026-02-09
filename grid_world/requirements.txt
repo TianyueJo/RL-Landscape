@@ -1,0 +1,21 @@
+# NOTE:
+# - We pin NumPy < 2 to avoid binary-compat issues with compiled wheels
+#   (e.g., matplotlib / scikit-learn) in some environments.
+# - This file is intended for the `grid_world/` training/evaluation/visualization scripts.
+
+# Core
+numpy==1.26.4
+setuptools==80.9.0
+wheel==0.45.1
+
+# RL / training
+torch>=2.2.0
+gymnasium==0.29.1
+
+# Analysis / plotting
+matplotlib>=3.8.0
+plotly>=5.20.0
+networkx>=3.2
+scikit-learn>=1.4.0
+
+

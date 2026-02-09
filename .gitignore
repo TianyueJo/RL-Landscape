@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtualenv
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs / outputs / artifacts (control)
+control/slurm_logs/
+control/models/
+control/results/
+control/videos/
+control/analysis_outputs/
+control/landscape_data/
+control/landscape_plots/
+
+# Logs / outputs / artifacts (grid_world)
+grid_world/slurm_logs/
+grid_world/models/
+grid_world/results/
+grid_world/behavior_space_embeddings/
+grid_world/evaluation/
+grid_world/env_visualization/
+
+

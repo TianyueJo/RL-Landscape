@@ -1,0 +1,82 @@
+# === Mujoco with 512 envs (Puffer-style, tuned for stronger learning) ===
+
+HalfCheetah-v4:
+  normalize: true
+  n_envs: 512
+  # 建议直接写成 1e7，既然你实际已经跑到 ~10M，就干脆设高一点
+  n_timesteps: !!float 1e7
+
+  policy: 'MlpLstmPolicy'
+
+  # 512 env × 64 steps = 32768 rollout steps（保持和 puffer 默认一致）
+  n_steps: 64
+
+  # 32768 / 4096 = 8 个 minibatch
+  # 之前 8192 的 minibatch 太大，梯度更新太“平滑”，再配上小 lr 就几乎不动了
+  batch_size: 4096
+
+  # 时序任务：更高 gamma，更适合长期跑步
+  gamma: 0.99
+  gae_lambda: 0.95
+
+  # 增加一点 epoch，但不要特别多，避免在旧数据上反复过拟合
+  n_epochs: 6          # 原来是 4
+
+  # 学习率显著调大一点，让 KL 和 clipfrac 真正动起来
+  learning_rate: !!float 2e-4
+
+  # HalfCheetah 探索要求高，但又容易发散，做个折中
+  ent_coef: 0.015
+
+  clip_range: 0.2
+  max_grad_norm: 0.5
+
+  # 降低 value loss 权重，让 actor 梯度更有话语权
+  vf_coef: 0.3
+
+  # 如果 puffer 这边会透传 target_kl，可以加一个软目标
+  # 没用的话也不会出错，只是被忽略
+  target_kl: 0.02
+
+  policy_kwargs: "dict(
+                    log_std_init=-2,
+                    ortho_init=False,
+                    activation_fn=nn.ReLU,
+                    lstm_hidden_size=128,
+                    enable_critic_lstm=True,
+                    net_arch=dict(pi=[128, 128], vf=[128, 128])
+                  )"
+
+
+Walker2d-v4:
+  normalize: true
+  n_envs: 512
+  n_timesteps: !!float 1e7
+
+  policy: 'MlpLstmPolicy'
+  n_steps: 64
+  batch_size: 4096
+
+  gamma: 0.99
+  gae_lambda: 0.95
+
+  n_epochs: 6
+  # Walker 相对稳定一点，可以再 aggressive 一点
+  learning_rate: !!float 3e-4
+
+  # 增强探索， Walker 比较容易卡在“站着晃”/小步走
+  ent_coef: 0.02
+
+  clip_range: 0.2
+  max_grad_norm: 0.5
+  vf_coef: 0.3
+  target_kl: 0.02
+
+  policy_kwargs: "dict(
+                    log_std_init=-2,
+                    ortho_init=False,
+                    activation_fn=nn.ReLU,
+                    lstm_hidden_size=128,
+                    enable_critic_lstm=True,
+                    net_arch=dict(pi=[128, 128], vf=[128, 128])
+                  )"
