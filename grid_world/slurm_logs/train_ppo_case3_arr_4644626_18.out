@@ -1,0 +1,50 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+任务信息：
+  Array Task ID: 18
+  随机种子: 18
+  Case ID: 3
+  总训练步数: 50000
+  节点: node15
+  时间: Fri Feb  6 11:12:49 EST 2026
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Case ID: 3, 随机种子: 18, 总训练步数: 50000
+观察维度: 2, 动作维度: 4
+开始训练...
+开始训练，总共 195 个 rollouts，50000 个 steps...
+Steps: 256/50000 | Rollout: 0/195 | Mean Return: 6.16 ± 3.61 | Range: [-0.50, 9.71] | Episodes: 9
+Steps: 2816/50000 | Rollout: 10/195 | Mean Return: 7.58 ± 1.66 | Range: [-0.50, 9.88] | Episodes: 100
+Steps: 5376/50000 | Rollout: 20/195 | Mean Return: 7.45 ± 2.04 | Range: [-0.50, 9.94] | Episodes: 100
+Steps: 7936/50000 | Rollout: 30/195 | Mean Return: 7.47 ± 1.83 | Range: [-0.50, 7.95] | Episodes: 100
+Steps: 10496/50000 | Rollout: 40/195 | Mean Return: 7.63 ± 1.43 | Range: [-0.50, 7.95] | Episodes: 100
+Steps: 13056/50000 | Rollout: 50/195 | Mean Return: 7.75 ± 1.20 | Range: [-0.50, 9.92] | Episodes: 100
+Steps: 15616/50000 | Rollout: 60/195 | Mean Return: 7.82 ± 0.84 | Range: [-0.50, 7.95] | Episodes: 100
+Steps: 18176/50000 | Rollout: 70/195 | Mean Return: 7.81 ± 0.84 | Range: [-0.50, 7.95] | Episodes: 100
+Steps: 20736/50000 | Rollout: 80/195 | Mean Return: 7.91 ± 0.05 | Range: [7.64, 7.95] | Episodes: 100
+Steps: 23296/50000 | Rollout: 90/195 | Mean Return: 7.93 ± 0.03 | Range: [7.84, 7.95] | Episodes: 100
+Steps: 25856/50000 | Rollout: 100/195 | Mean Return: 7.92 ± 0.03 | Range: [7.78, 7.95] | Episodes: 100
+Steps: 28416/50000 | Rollout: 110/195 | Mean Return: 7.93 ± 0.02 | Range: [7.80, 7.95] | Episodes: 100
+Steps: 30976/50000 | Rollout: 120/195 | Mean Return: 7.93 ± 0.03 | Range: [7.77, 7.95] | Episodes: 100
+Steps: 33536/50000 | Rollout: 130/195 | Mean Return: 7.94 ± 0.01 | Range: [7.88, 7.95] | Episodes: 100
+Steps: 36096/50000 | Rollout: 140/195 | Mean Return: 7.95 ± 0.01 | Range: [7.92, 7.95] | Episodes: 100
+Steps: 38656/50000 | Rollout: 150/195 | Mean Return: 7.86 ± 0.84 | Range: [-0.50, 7.95] | Episodes: 100
+Steps: 41216/50000 | Rollout: 160/195 | Mean Return: 7.95 ± 0.01 | Range: [7.91, 7.95] | Episodes: 100
+Steps: 43776/50000 | Rollout: 170/195 | Mean Return: 7.95 ± 0.00 | Range: [7.93, 7.95] | Episodes: 100
+Steps: 46336/50000 | Rollout: 180/195 | Mean Return: 7.95 ± 0.01 | Range: [7.91, 7.95] | Episodes: 100
+Steps: 48896/50000 | Rollout: 190/195 | Mean Return: 7.86 ± 0.84 | Range: [-0.50, 7.95] | Episodes: 100
+
+模型已保存到: models/gridworld_ppo_case_3_seed_18.pt
+
+评估结果:
+平均回报: 7.95 ± 0.00
+平均步数: 5.0
+
+示例轨迹:
+Step 4: event=candy_terminal, reward=7.99, pos=(1, 5)
+结束: Step 4, final_reward=7.99
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+训练完成！
+  随机种子: 18
+  完成时间: Fri Feb  6 11:14:02 EST 2026
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

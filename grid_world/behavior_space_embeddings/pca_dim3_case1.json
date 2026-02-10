@@ -1,0 +1,81 @@
+{
+  "case_id": 1,
+  "method": "pca",
+  "dim": 3,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "model_paths": [
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_0.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_1.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_2.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_3.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_4.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_5.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_6.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_7.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_8.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_9.pt"
+  ],
+  "embeddings": [
+    [
+      9.681888580322266,
+      0.07756716758012772,
+      -0.09631362557411194
+    ],
+    [
+      -22.39276123046875,
+      0.48249152302742004,
+      0.22004929184913635
+    ],
+    [
+      9.646056175231934,
+      -0.3729139566421509,
+      0.45549824833869934
+    ],
+    [
+      9.680889129638672,
+      0.07171032577753067,
+      -0.0908968597650528
+    ],
+    [
+      9.681883811950684,
+      0.07599581778049469,
+      -0.09622608125209808
+    ],
+    [
+      -22.52244758605957,
+      0.20379257202148438,
+      -0.06073562055826187
+    ],
+    [
+      9.660102844238281,
+      0.029326319694519043,
+      -0.04098961129784584
+    ],
+    [
+      -22.79271697998047,
+      -0.6782650351524353,
+      -0.1575707644224167
+    ],
+    [
+      9.676753997802734,
+      0.03677001968026161,
+      -0.03977113589644432
+    ],
+    [
+      9.680344581604004,
+      0.07352662831544876,
+      -0.09304451942443848
+    ]
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "case_id": 1,
+  "method": "tsne",
+  "dim": 3,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "model_paths": [
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_0.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_1.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_2.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_3.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_4.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_5.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_6.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_7.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_8.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_1_seed_9.pt"
+  ],
+  "embeddings": [
+    [
+      -57.30074691772461,
+      56.5290412902832,
+      53.3453369140625
+    ],
+    [
+      -89.1611557006836,
+      84.87882232666016,
+      -112.3026123046875
+    ],
+    [
+      127.29219818115234,
+      -101.00617980957031,
+      -71.6769027709961
+    ],
+    [
+      -28.38933753967285,
+      -15.799763679504395,
+      -26.367265701293945
+    ],
+    [
+      30.349754333496094,
+      -39.4235954284668,
+      67.6075210571289
+    ],
+    [
+      -135.35943603515625,
+      -110.2671890258789,
+      24.273853302001953
+    ],
+    [
+      89.50852966308594,
+      19.235219955444336,
+      -29.379928588867188
+    ],
+    [
+      -61.61859130859375,
+      -167.41348266601562,
+      -21.714296340942383
+    ],
+    [
+      31.64498519897461,
+      -27.03394889831543,
+      -119.03479766845703
+    ],
+    [
+      54.66881561279297,
+      77.83686828613281,
+      62.627193450927734
+    ]
+  ]
+}

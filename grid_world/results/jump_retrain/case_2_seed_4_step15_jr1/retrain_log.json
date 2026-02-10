@@ -1,0 +1,70 @@
+{
+  "case_id": 2,
+  "seed": 4,
+  "step_size": 15.0,
+  "jr_index": 1,
+  "extra_steps": 10000,
+  "log_interval": 1000,
+  "episode_rewards": [
+    {
+      "step": 1024,
+      "mean_return": 9.866666666666669,
+      "std_return": 0.016996731711976226,
+      "num_episodes": 75
+    },
+    {
+      "step": 2048,
+      "mean_return": 9.865,
+      "std_return": 0.015842979517755217,
+      "num_episodes": 100
+    },
+    {
+      "step": 3072,
+      "mean_return": 9.8597,
+      "std_return": 0.020122375605281097,
+      "num_episodes": 100
+    },
+    {
+      "step": 4096,
+      "mean_return": 9.8554,
+      "std_return": 0.023212927432790804,
+      "num_episodes": 100
+    },
+    {
+      "step": 5120,
+      "mean_return": 9.8659,
+      "std_return": 0.014359317532529605,
+      "num_episodes": 100
+    },
+    {
+      "step": 6144,
+      "mean_return": 9.8716,
+      "std_return": 0.01383618444514271,
+      "num_episodes": 100
+    },
+    {
+      "step": 7168,
+      "mean_return": 9.873099999999999,
+      "std_return": 0.00996945334509407,
+      "num_episodes": 100
+    },
+    {
+      "step": 8192,
+      "mean_return": 9.8671,
+      "std_return": 0.016987936896516023,
+      "num_episodes": 100
+    },
+    {
+      "step": 9216,
+      "mean_return": 9.8665,
+      "std_return": 0.013592277219068595,
+      "num_episodes": 100
+    },
+    {
+      "step": 10240,
+      "mean_return": 9.867199999999999,
+      "std_return": 0.013496666255042814,
+      "num_episodes": 100
+    }
+  ]
+}

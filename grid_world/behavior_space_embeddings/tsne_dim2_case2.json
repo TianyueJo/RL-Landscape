@@ -1,0 +1,71 @@
+{
+  "case_id": 2,
+  "method": "tsne",
+  "dim": 2,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "model_paths": [
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_2_seed_0.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_2_seed_1.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_2_seed_2.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_2_seed_3.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_2_seed_4.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_2_seed_5.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_2_seed_6.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_2_seed_7.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_2_seed_8.pt",
+    "/mnt/home/tianyuez/landscape-v2/grid_world/models/gridworld_ppo_case_2_seed_9.pt"
+  ],
+  "embeddings": [
+    [
+      -3.2245564460754395,
+      13.757953643798828
+    ],
+    [
+      18.425918579101562,
+      3.242426633834839
+    ],
+    [
+      -30.0229434967041,
+      30.485206604003906
+    ],
+    [
+      -85.6170654296875,
+      60.426753997802734
+    ],
+    [
+      16.51726722717285,
+      29.57862663269043
+    ],
+    [
+      -5.429652690887451,
+      38.163291931152344
+    ],
+    [
+      -93.19551086425781,
+      38.721248626708984
+    ],
+    [
+      -50.1234245300293,
+      38.34663772583008
+    ],
+    [
+      41.05170822143555,
+      12.802549362182617
+    ],
+    [
+      -107.4638671875,
+      55.84622573852539
+    ]
+  ]
+}

@@ -1,0 +1,221 @@
+==========================================
+[Behavior Space Graph] Starting job
+Time: Thu Dec 18 11:12:36 EST 2025
+Node: node6
+Job ID: 4641059
+==========================================
+Checking and installing required packages...
+[Step 0] Preparing policy collection...
+  Found 16 original policies
+  Found 0 retrain policies
+
+[Step 1] Collecting representative states using 16 original policies...
+  Collecting states from task 0...
+  Collecting states from task 1...
+  Collecting states from task 2...
+  Collecting states from task 3...
+  Collecting states from task 4...
+  Collecting states from task 5...
+  Collecting states from task 6...
+  Collecting states from task 7...
+  Collecting states from task 8...
+  Collecting states from task 9...
+  Collecting states from task 10...
+  Collecting states from task 11...
+  Collecting states from task 12...
+  Collecting states from task 13...
+  Collecting states from task 14...
+  Collecting states from task 15...
+  Collected 160 states total
+  Selected 160 representative states
+
+[Step 2] Computing behavior vectors for 16 policies...
+  Computing behavior vector for original policy task 0...
+  Computing behavior vector for original policy task 1...
+  Computing behavior vector for original policy task 2...
+  Computing behavior vector for original policy task 3...
+  Computing behavior vector for original policy task 4...
+  Computing behavior vector for original policy task 5...
+  Computing behavior vector for original policy task 6...
+  Computing behavior vector for original policy task 7...
+  Computing behavior vector for original policy task 8...
+  Computing behavior vector for original policy task 9...
+  Computing behavior vector for original policy task 10...
+  Computing behavior vector for original policy task 11...
+  Computing behavior vector for original policy task 12...
+  Computing behavior vector for original policy task 13...
+  Computing behavior vector for original policy task 14...
+  Computing behavior vector for original policy task 15...
+  Behavior matrix shape: (16, 960)
+
+[Step 3] Applying PCA and computing L2 distance matrices...
+[PCA2] explained_variance_ratio sum = 0.4359
+[PCA6] explained_variance_ratio sum = 0.8060
+[PCA10] explained_variance_ratio sum = 0.9447
+  2D PCA shape: (16, 2)
+  2D Explained variance ratio: [0.22480883 0.21113664]
+  2D Total explained variance: 0.4359
+  PCA2 L2 Distance range: [2.3799, 42.3815], mean: 16.8343, median: 14.3736
+  PCA6 L2 Distance range: [11.0216, 42.8729], mean: 25.2843, median: 24.6846
+  PCA10 L2 Distance range: [14.6484, 43.3827], mean: 27.7072, median: 27.0895
+
+Valid data points: 16/16
+
+[Step 4] Creating 3D visualization...
+[Saved] Interactive HTML: analysis_outputs/behavior_space_pca_3d.html
+[Saved] Static PNG: analysis_outputs/behavior_space_pca_3d.png
+
+[Step 5] Visualizing behavior space graph...
+  使用默认阈值（中位数距离）: 27.0895
+
+  构建 PCA2 图...
+
+======================================================================
+行为空间图统计信息
+======================================================================
+节点数: 16
+边数: 100
+连通分量数: 1
+阈值: 27.0895
+
+边的 L2 距离统计:
+  最小值: 2.3799
+  最大值: 26.9368
+  平均值: 13.5278
+  中位数: 13.2769
+
+节点度统计:
+  最小度: 1
+  最大度: 15
+  平均度: 12.50
+
+连通分量:
+  分量 1: ['T0', 'T1', 'T10', 'T11', 'T12', 'T13', 'T14', 'T15', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9'] (大小: 16)
+
+所有边 (共 100 条):
+  T3 <-> T5: L2 distance = 2.3799
+  T13 <-> T14: L2 distance = 2.6871
+  T6 <-> T12: L2 distance = 3.2184
+  T13 <-> T15: L2 distance = 3.3725
+  T14 <-> T15: L2 distance = 3.5473
+  T1 <-> T2: L2 distance = 4.0298
+  T0 <-> T8: L2 distance = 4.4213
+  T11 <-> T12: L2 distance = 4.6821
+  T3 <-> T11: L2 distance = 5.0600
+  T5 <-> T11: L2 distance = 5.4405
+  T6 <-> T13: L2 distance = 5.6540
+  T0 <-> T2: L2 distance = 5.6705
+  T12 <-> T15: L2 distance = 5.7322
+  T8 <-> T14: L2 distance = 6.0175
+  T12 <-> T13: L2 distance = 6.3194
+  T3 <-> T7: L2 distance = 6.4474
+  T6 <-> T15: L2 distance = 6.8261
+  T6 <-> T11: L2 distance = 7.4842
+  T9 <-> T15: L2 distance = 7.4924
+  T6 <-> T10: L2 distance = 7.6644
+  ... (还有 80 条边)
+======================================================================
+✓ 图已保存到: analysis_outputs/behavior_graph_pca2_threshold_27.0895.png
+
+  构建 PCA6 图...
+
+======================================================================
+行为空间图统计信息
+======================================================================
+节点数: 16
+边数: 76
+连通分量数: 2
+阈值: 27.0895
+
+边的 L2 距离统计:
+  最小值: 11.0216
+  最大值: 27.0489
+  平均值: 20.8679
+  中位数: 20.6741
+
+节点度统计:
+  最小度: 0
+  最大度: 14
+  平均度: 9.50
+
+连通分量:
+  分量 1: ['T0', 'T1', 'T10', 'T11', 'T12', 'T13', 'T14', 'T15', 'T2', 'T3', 'T5', 'T6', 'T7', 'T8', 'T9'] (大小: 15)
+  分量 2: ['T4'] (大小: 1)
+
+所有边 (共 76 条):
+  T1 <-> T2: L2 distance = 11.0216
+  T5 <-> T12: L2 distance = 12.0564
+  T6 <-> T15: L2 distance = 13.0599
+  T12 <-> T13: L2 distance = 13.1158
+  T0 <-> T2: L2 distance = 13.7331
+  T2 <-> T15: L2 distance = 14.4981
+  T3 <-> T7: L2 distance = 14.8360
+  T8 <-> T15: L2 distance = 14.9198
+  T6 <-> T10: L2 distance = 15.2866
+  T3 <-> T5: L2 distance = 15.3229
+  T14 <-> T15: L2 distance = 16.1601
+  T3 <-> T10: L2 distance = 16.7656
+  T12 <-> T15: L2 distance = 16.8400
+  T3 <-> T15: L2 distance = 16.9782
+  T7 <-> T11: L2 distance = 17.0170
+  T13 <-> T15: L2 distance = 17.1668
+  T2 <-> T14: L2 distance = 17.2925
+  T5 <-> T13: L2 distance = 17.3298
+  T10 <-> T12: L2 distance = 17.3499
+  T0 <-> T13: L2 distance = 17.7997
+  ... (还有 56 条边)
+======================================================================
+✓ 图已保存到: analysis_outputs/behavior_graph_pca6_threshold_27.0895.png
+
+  构建 PCA10 图...
+
+======================================================================
+行为空间图统计信息
+======================================================================
+节点数: 16
+边数: 60
+连通分量数: 2
+阈值: 27.0895
+
+边的 L2 距离统计:
+  最小值: 14.6484
+  最大值: 26.9817
+  平均值: 22.4995
+  中位数: 23.8293
+
+节点度统计:
+  最小度: 0
+  最大度: 13
+  平均度: 7.50
+
+连通分量:
+  分量 1: ['T0', 'T1', 'T10', 'T11', 'T12', 'T13', 'T14', 'T15', 'T2', 'T3', 'T5', 'T6', 'T7', 'T8', 'T9'] (大小: 15)
+  分量 2: ['T4'] (大小: 1)
+
+所有边 (共 60 条):
+  T12 <-> T13: L2 distance = 14.6484
+  T3 <-> T7: L2 distance = 15.9752
+  T6 <-> T15: L2 distance = 16.0130
+  T8 <-> T15: L2 distance = 16.6156
+  T6 <-> T10: L2 distance = 16.8809
+  T12 <-> T15: L2 distance = 17.2770
+  T3 <-> T10: L2 distance = 18.4862
+  T10 <-> T12: L2 distance = 18.5190
+  T13 <-> T15: L2 distance = 18.5413
+  T14 <-> T15: L2 distance = 18.7671
+  T3 <-> T15: L2 distance = 19.0822
+  T10 <-> T13: L2 distance = 19.2841
+  T10 <-> T15: L2 distance = 19.3136
+  T3 <-> T6: L2 distance = 19.6436
+  T2 <-> T15: L2 distance = 19.7586
+  T11 <-> T12: L2 distance = 19.9261
+  T5 <-> T12: L2 distance = 19.9327
+  T11 <-> T15: L2 distance = 19.9974
+  T7 <-> T11: L2 distance = 20.0361
+  T3 <-> T5: L2 distance = 20.0912
+  ... (还有 40 条边)
+======================================================================
+✓ 图已保存到: analysis_outputs/behavior_graph_pca10_threshold_27.0895.png
+[Saved] Data file: analysis_outputs/behavior_space_pca_3d.npz
+End time: Thu Dec 18 11:13:16 EST 2025
+任务完成！

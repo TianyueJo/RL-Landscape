@@ -1,0 +1,657 @@
+==========================================
+渲染 Walker2d-v4 任务 0-15 的策略视频 (best_model)
+时间: Thu Dec 11 13:32:30 EST 2025
+节点: node1
+输出目录: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos
+MUJOCO_GL=osmesa
+PYOPENGL_PLATFORM=osmesa
+==========================================
+
+------------------------------------------
+任务 0
+  环境: Walker2d-v4
+  训练种子: 200
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_0_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_0/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_0/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_0/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_0/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_0_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_0/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_0/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 1001 帧, 奖励 = 1116.84 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 144 帧, 奖励 = 69.83 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 518 帧, 奖励 = 467.77 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_0_best.mp4 (1663 帧)...
+  ✓ 视频已保存
+  平均奖励: 551.48 ± 431.52
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_0_best.mp4
+  ✓ 完成任务 0
+
+------------------------------------------
+任务 1
+  环境: Walker2d-v4
+  训练种子: 201
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_1_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_1/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_1/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_1/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_1/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_1_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_1/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_1/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 633 帧, 奖励 = 643.80 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 307 帧, 奖励 = 265.88 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 208 帧, 奖励 = 158.42 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_1_best.mp4 (1148 帧)...
+  ✓ 视频已保存
+  平均奖励: 356.03 ± 208.16
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_1_best.mp4
+  ✓ 完成任务 1
+
+------------------------------------------
+任务 2
+  环境: Walker2d-v4
+  训练种子: 202
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_2_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_2/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_2/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_2/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_2/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_2_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_2/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_2/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 225 帧, 奖励 = 143.18 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 1001 帧, 奖励 = 995.66 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 106 帧, 奖励 = 30.74 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_2_best.mp4 (1332 帧)...
+  ✓ 视频已保存
+  平均奖励: 389.86 ± 430.82
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_2_best.mp4
+  ✓ 完成任务 2
+
+------------------------------------------
+任务 3
+  环境: Walker2d-v4
+  训练种子: 203
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_3_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_3/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_3/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_3/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_3/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_3_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_3/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_3/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 138 帧, 奖励 = 74.45 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 209 帧, 奖励 = 161.01 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 1001 帧, 奖励 = 1131.30 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_3_best.mp4 (1348 帧)...
+  ✓ 视频已保存
+  平均奖励: 455.59 ± 479.11
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_3_best.mp4
+  ✓ 完成任务 3
+
+------------------------------------------
+任务 4
+  环境: Walker2d-v4
+  训练种子: 204
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_4_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_4/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_4/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_4/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_4/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_4_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_4/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_4/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 292 帧, 奖励 = 203.81 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 279 帧, 奖励 = 215.50 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 185 帧, 奖励 = 86.89 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_4_best.mp4 (756 帧)...
+  ✓ 视频已保存
+  平均奖励: 168.73 ± 58.07
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_4_best.mp4
+  ✓ 完成任务 4
+
+------------------------------------------
+任务 5
+  环境: Walker2d-v4
+  训练种子: 205
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_5_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_5/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_5/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_5/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_5/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_5_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_5/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_5/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 1001 帧, 奖励 = 993.29 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 455 帧, 奖励 = 230.32 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 620 帧, 奖励 = 457.45 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_5_best.mp4 (2076 帧)...
+  ✓ 视频已保存
+  平均奖励: 560.35 ± 319.87
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_5_best.mp4
+  ✓ 完成任务 5
+
+------------------------------------------
+任务 6
+  环境: Walker2d-v4
+  训练种子: 206
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_6_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_6/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_6/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_6/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_6/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_6_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_6/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_6/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 1001 帧, 奖励 = 954.73 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 248 帧, 奖励 = 163.28 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 125 帧, 奖励 = 18.42 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_6_best.mp4 (1374 帧)...
+  ✓ 视频已保存
+  平均奖励: 378.81 ± 411.51
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_6_best.mp4
+  ✓ 完成任务 6
+
+------------------------------------------
+任务 7
+  环境: Walker2d-v4
+  训练种子: 207
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_7_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_7/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_7/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_7/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_7/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_7_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_7/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_7/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 250 帧, 奖励 = 127.10 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 1001 帧, 奖励 = 985.42 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 620 帧, 奖励 = 444.40 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_7_best.mp4 (1871 帧)...
+  ✓ 视频已保存
+  平均奖励: 518.98 ± 354.35
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_7_best.mp4
+  ✓ 完成任务 7
+
+------------------------------------------
+任务 8
+  环境: Walker2d-v4
+  训练种子: 200
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_8_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_8/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_8/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_8/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_8/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_8_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_8/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_8/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 111 帧, 奖励 = 42.59 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 212 帧, 奖励 = 127.39 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 538 帧, 奖励 = 638.18 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_8_best.mp4 (861 帧)...
+  ✓ 视频已保存
+  平均奖励: 269.39 ± 263.06
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_8_best.mp4
+  ✓ 完成任务 8
+
+------------------------------------------
+任务 9
+  环境: Walker2d-v4
+  训练种子: 200
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_9_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_9/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_9/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_9/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_9/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_9_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_9/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_9/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 68 帧, 奖励 = -7.62 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 70 帧, 奖励 = -6.47 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 70 帧, 奖励 = -6.03 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_9_best.mp4 (208 帧)...
+  ✓ 视频已保存
+  平均奖励: -6.71 ± 0.67
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_9_best.mp4
+  ✓ 完成任务 9
+
+------------------------------------------
+任务 10
+  环境: Walker2d-v4
+  训练种子: 200
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_10_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_10/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_10/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_10/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_10/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_10_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_10/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_10/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 59 帧, 奖励 = -9.43 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 61 帧, 奖励 = -8.15 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 64 帧, 奖励 = -8.34 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_10_best.mp4 (184 帧)...
+  ✓ 视频已保存
+  平均奖励: -8.64 ± 0.56
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_10_best.mp4
+  ✓ 完成任务 10
+
+------------------------------------------
+任务 11
+  环境: Walker2d-v4
+  训练种子: 200
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_11_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_11/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_11/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_11/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_11/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_11_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_11/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_11/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 64 帧, 奖励 = -8.66 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 63 帧, 奖励 = -9.27 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 63 帧, 奖励 = -9.68 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_11_best.mp4 (190 帧)...
+  ✓ 视频已保存
+  平均奖励: -9.20 ± 0.42
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_11_best.mp4
+  ✓ 完成任务 11
+
+------------------------------------------
+任务 12
+  环境: Walker2d-v4
+  训练种子: 200
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_12_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_12/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_12/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_12/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_12/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_12_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_12/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_12/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 68 帧, 奖励 = -4.71 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 68 帧, 奖励 = -4.25 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 69 帧, 奖励 = -3.58 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_12_best.mp4 (205 帧)...
+  ✓ 视频已保存
+  平均奖励: -4.18 ± 0.46
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_12_best.mp4
+  ✓ 完成任务 12
+
+------------------------------------------
+任务 13
+  环境: Walker2d-v4
+  训练种子: 200
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_13_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_13/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_13/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_13/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_13/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_13_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_13/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_13/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 131 帧, 奖励 = 58.86 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 1001 帧, 奖励 = 1262.72 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 132 帧, 奖励 = 55.50 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_13_best.mp4 (1264 帧)...
+  ✓ 视频已保存
+  平均奖励: 459.03 ± 568.30
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_13_best.mp4
+  ✓ 完成任务 13
+
+------------------------------------------
+任务 14
+  环境: Walker2d-v4
+  训练种子: 200
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_14_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_14/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_14/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_14/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_14/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_14_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_14/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_14/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 71 帧, 奖励 = -12.61 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 72 帧, 奖励 = -11.92 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 72 帧, 奖励 = -11.69 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_14_best.mp4 (215 帧)...
+  ✓ 视频已保存
+  平均奖励: -12.07 ± 0.39
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_14_best.mp4
+  ✓ 完成任务 14
+
+------------------------------------------
+任务 15
+  环境: Walker2d-v4
+  训练种子: 200
+  输出: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_15_best.mp4
+  统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_15/vec_stats.npz
+------------------------------------------
+
+[预处理] 生成 Walker2d-v4 的归一化统计 -> /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_15/vec_stats.npz
+[归一化] 已生成统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_15/vec_stats.npz
+================================================================================
+策略视频录制
+================================================================================
+环境: Walker2d-v4
+模型路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_15/best_model.pt
+输出路径: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_15_best.mp4
+Episode数: 3
+最大步数: 1000
+帧率: 30 fps
+================================================================================
+加载策略 from /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_15/best_model.pt
+  ✓ 成功加载模型权重
+[归一化] 已加载统计文件: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/models/controlled_task_15/vec_stats.npz
+  使用driver_env进行渲染
+
+开始录制 3 个episode...
+  Episode 1/3
+    Episode 1 完成: 222 帧, 奖励 = 141.34 （原始奖励）
+  Episode 2/3
+    Episode 2 完成: 344 帧, 奖励 = 253.95 （原始奖励）
+  Episode 3/3
+    Episode 3 完成: 221 帧, 奖励 = 145.00 （原始奖励）
+
+保存视频到 /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_15_best.mp4 (787 帧)...
+  ✓ 视频已保存
+  平均奖励: 180.10 ± 52.25
+
+✓ 完成！视频已保存到: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/Walker2d-v4_task_15_best.mp4
+  ✓ 完成任务 15
+
+==========================================
+完成任务: 16
+成功: 16, 失败: 0
+结束时间: Thu Dec 11 14:05:36 EST 2025
+==========================================
+
+视频文件位置: /mnt/home/tianyuez/landscape-v2/comparison/puffer_examples/videos/Walker2d-v4/
+视频文件数量: 16

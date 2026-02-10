@@ -1,0 +1,236 @@
+{
+  "action_mode": "stochastic",
+  "case_1": {
+    "seeds_data": {
+      "seed_0": {
+        "mean_return": 0.95,
+        "std_return": 0.0,
+        "success_rate": 0.0
+      },
+      "seed_1": {
+        "mean_return": 9.88,
+        "std_return": 0.0,
+        "success_rate": 1.0
+      },
+      "seed_2": {
+        "mean_return": 0.95,
+        "std_return": 0.0,
+        "success_rate": 0.0
+      },
+      "seed_3": {
+        "mean_return": 0.95,
+        "std_return": 0.0,
+        "success_rate": 0.0
+      },
+      "seed_4": {
+        "mean_return": 0.95,
+        "std_return": 0.0,
+        "success_rate": 0.0
+      },
+      "seed_5": {
+        "mean_return": 9.878000000000002,
+        "std_return": 0.003999999999999915,
+        "success_rate": 1.0
+      },
+      "seed_6": {
+        "mean_return": 0.95,
+        "std_return": 0.0,
+        "success_rate": 0.0
+      },
+      "seed_7": {
+        "mean_return": 9.878000000000002,
+        "std_return": 0.003999999999999915,
+        "success_rate": 1.0
+      },
+      "seed_8": {
+        "mean_return": 0.95,
+        "std_return": 0.0,
+        "success_rate": 0.0
+      },
+      "seed_9": {
+        "mean_return": 0.95,
+        "std_return": 0.0,
+        "success_rate": 0.0
+      }
+    },
+    "summary": {
+      "mean_return": 3.628600000000001,
+      "std_return": 4.091629118089762,
+      "min_return": 0.95,
+      "max_return": 9.88,
+      "mean_success_rate": 0.3
+    }
+  },
+  "case_2": {
+    "seeds_data": {
+      "seed_0": {
+        "mean_return": 9.870000000000001,
+        "std_return": 0.008944271909999761,
+        "success_rate": 1.0
+      },
+      "seed_1": {
+        "mean_return": 9.868,
+        "std_return": 0.011661903789691145,
+        "success_rate": 1.0
+      },
+      "seed_2": {
+        "mean_return": 9.878000000000002,
+        "std_return": 0.003999999999999915,
+        "success_rate": 1.0
+      },
+      "seed_3": {
+        "mean_return": 0.938,
+        "std_return": 0.0040000000000000036,
+        "success_rate": 0.0
+      },
+      "seed_4": {
+        "mean_return": 9.876000000000001,
+        "std_return": 0.004898979485566252,
+        "success_rate": 1.0
+      },
+      "seed_5": {
+        "mean_return": 9.872,
+        "std_return": 0.009797958971133374,
+        "success_rate": 1.0
+      },
+      "seed_6": {
+        "mean_return": 0.9399999999999998,
+        "std_return": 1.1102230246251565e-16,
+        "success_rate": 0.0
+      },
+      "seed_7": {
+        "mean_return": 9.868,
+        "std_return": 0.0193907194296656,
+        "success_rate": 1.0
+      },
+      "seed_8": {
+        "mean_return": 9.874,
+        "std_return": 0.008000000000000451,
+        "success_rate": 1.0
+      },
+      "seed_9": {
+        "mean_return": 0.9399999999999998,
+        "std_return": 1.1102230246251565e-16,
+        "success_rate": 0.0
+      }
+    },
+    "summary": {
+      "mean_return": 7.192399999999999,
+      "std_return": 4.093594195813748,
+      "min_return": 0.938,
+      "max_return": 9.878000000000002,
+      "mean_success_rate": 0.7
+    }
+  },
+  "case_3": {
+    "seeds_data": {
+      "seed_0": {
+        "mean_return": 7.95,
+        "std_return": 0.0,
+        "success_rate": 0.0
+      },
+      "seed_1": {
+        "mean_return": 7.944000000000001,
+        "std_return": 0.004898979485566252,
+        "success_rate": 0.0
+      },
+      "seed_2": {
+        "mean_return": 7.95,
+        "std_return": 0.0,
+        "success_rate": 0.0
+      },
+      "seed_3": {
+        "mean_return": 9.94,
+        "std_return": 0.0,
+        "success_rate": 1.0
+      },
+      "seed_4": {
+        "mean_return": 9.92,
+        "std_return": 0.01897366596100987,
+        "success_rate": 1.0
+      },
+      "seed_5": {
+        "mean_return": 9.94,
+        "std_return": 0.0,
+        "success_rate": 1.0
+      },
+      "seed_6": {
+        "mean_return": 9.94,
+        "std_return": 0.0,
+        "success_rate": 1.0
+      },
+      "seed_7": {
+        "mean_return": 7.916000000000001,
+        "std_return": 0.028705400188814678,
+        "success_rate": 0.0
+      },
+      "seed_8": {
+        "mean_return": 7.944,
+        "std_return": 0.00799999999999983,
+        "success_rate": 0.0
+      },
+      "seed_9": {
+        "mean_return": 9.94,
+        "std_return": 0.0,
+        "success_rate": 1.0
+      },
+      "seed_10": {
+        "mean_return": 7.847999999999999,
+        "std_return": 4.174007187344075,
+        "success_rate": 0.8
+      },
+      "seed_11": {
+        "mean_return": 7.944000000000001,
+        "std_return": 0.012000000000000099,
+        "success_rate": 0.0
+      },
+      "seed_12": {
+        "mean_return": 9.94,
+        "std_return": 0.0,
+        "success_rate": 1.0
+      },
+      "seed_13": {
+        "mean_return": 9.94,
+        "std_return": 0.0,
+        "success_rate": 1.0
+      },
+      "seed_14": {
+        "mean_return": 7.946000000000001,
+        "std_return": 0.004898979485566252,
+        "success_rate": 0.0
+      },
+      "seed_15": {
+        "mean_return": 9.94,
+        "std_return": 0.0,
+        "success_rate": 1.0
+      },
+      "seed_16": {
+        "mean_return": 7.95,
+        "std_return": 0.0,
+        "success_rate": 0.0
+      },
+      "seed_17": {
+        "mean_return": 9.477999999999998,
+        "std_return": 0.7787785307775243,
+        "success_rate": 0.8
+      },
+      "seed_18": {
+        "mean_return": 7.95,
+        "std_return": 0.0,
+        "success_rate": 0.0
+      },
+      "seed_19": {
+        "mean_return": 9.889999999999999,
+        "std_return": 0.06131883886702313,
+        "success_rate": 1.0
+      }
+    },
+    "summary": {
+      "mean_return": 8.910499999999999,
+      "std_return": 0.9813374292260533,
+      "min_return": 7.847999999999999,
+      "max_return": 9.94,
+      "mean_success_rate": 0.53
+    }
+  }
+}

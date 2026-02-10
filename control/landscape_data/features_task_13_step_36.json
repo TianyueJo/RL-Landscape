@@ -1,0 +1,20 @@
+{
+  "sharpness": 0.8211286821361227,
+  "gradient_smoothness": 0.016558037833262665,
+  "loss_mean": 0.0,
+  "loss_std": 0.0,
+  "loss_trend": 1.0964632795697656e-10,
+  "parameter_norm": 24.438951803039753,
+  "lambda_max_10": 3.4800992012023926,
+  "hessian_trace_10": 27.073282051086426,
+  "fim_trace": 103.1381615921855,
+  "step_count": 36,
+  "timestamp": 1763767746.135195,
+  "episode_reward": 444.46874419699407,
+  "num_steps": 1212416,
+  "feature_compute_time_s": 6.115732431411743,
+  "train_iter_time_s": 16.499954223632812,
+  "init_seed": 205,
+  "train_seed": 200,
+  "best_reward_so_far": 444.46874419699407
+}

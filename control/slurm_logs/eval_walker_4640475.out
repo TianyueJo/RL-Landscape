@@ -1,0 +1,34 @@
+==========================================
+[Evaluation] Walker2d tasks 0-15
+时间: Thu Dec 11 12:51:24 EST 2025
+节点: node1
+==========================================
+
+================================================================================
+评估 Walker2d-v4 的 16 个策略
+================================================================================
+
+Task 0: mean_return=17.97 ± 13.62
+Task 1: mean_return=7.99 ± 6.39
+Task 2: mean_return=9.16 ± 9.14
+Task 3: mean_return=10.30 ± 10.14
+Task 4: mean_return=7.96 ± 5.20
+Task 5: mean_return=6.44 ± 7.29
+Task 6: mean_return=13.33 ± 11.10
+Task 7: mean_return=9.82 ± 7.87
+Task 8: mean_return=0.83 ± 6.50
+Task 9: mean_return=18.05 ± 14.69
+Task 10: mean_return=1.03 ± 5.96
+Task 11: mean_return=6.54 ± 10.66
+Task 12: mean_return=1.16 ± 5.37
+Task 13: mean_return=6.92 ± 7.30
+Task 14: mean_return=0.73 ± 5.34
+Task 15: mean_return=1.67 ± 5.01
+
+✓ 评估结果已保存: evaluation_results/Walker2d-v4_evaluation_results.json
+
+汇总统计:
+  平均 return: 7.49 ± 5.48
+  最小 return: 0.73
+  最大 return: 18.05
+[Evaluation] Walker2d 评估完成。

@@ -1,0 +1,9 @@
+/mnt/home/tianyuez/landscape-v2/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/mnt/home/tianyuez/landscape-v2/.venv/lib/python3.10/site-packages/gymnasium/envs/registration.py:788: UserWarning: [33mWARN: The environment is being initialised with render_mode='rgbarray' that is not in the possible render_modes (['human', 'rgb_array', 'depth_array']).[0m
+  logger.warn(
+/mnt/home/tianyuez/landscape-v2/.venv/lib/python3.10/site-packages/torch/__init__.py:1617: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:80.)
+  _C._set_float32_matmul_precision(precision)
+/mnt/home/tianyuez/landscape-v2/.venv/lib/python3.10/site-packages/gymnasium/envs/registration.py:788: UserWarning: [33mWARN: The environment is being initialised with render_mode='rgbarray' that is not in the possible render_modes (['human', 'rgb_array', 'depth_array']).[0m
+  logger.warn(
+slurmstepd: error: *** JOB 4641065 ON node6 CANCELLED AT 2025-12-18T12:52:27 ***

@@ -1,0 +1,26 @@
+==========================================
+[JS Divergence] Walker2d tasks 0-15
+时间: Thu Dec 11 12:26:36 EST 2025
+节点: node1
+==========================================
+
+================================================================================
+计算 Walker2d-v4 的相似度矩阵
+================================================================================
+加载 16 个policies...
+
+采样 500 个状态...
+状态形状: (500, 17)
+
+计算 16x16 相似度矩阵...
+✓ 相似度矩阵已保存: analysis_outputs/walker_similarity/Walker2d-v4_similarity_matrix.npy
+✓ 相似度矩阵图已保存: analysis_outputs/walker_similarity/Walker2d-v4_similarity_matrix.png
+✓ 汇总保存至 analysis_outputs/walker_similarity/summary.json
+
+统计信息:
+  mean: 0.2052
+  std: 0.0453
+  min: 0.1205
+  max: 0.3653
+  median: 0.1991
+[JS Divergence] Walker2d 计算完成。
