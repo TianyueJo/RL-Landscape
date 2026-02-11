@@ -70,6 +70,84 @@ def build_graph(distances: np.ndarray, threshold: float) -> nx.Graph:
     return g
 
 
+def pairwise_distances_upper(distances: np.ndarray) -> np.ndarray:
+    """
+    Extract the upper-triangular pairwise distances (excluding diagonal).
+    Returns shape (M,) where M = n*(n-1)/2.
+    """
+    if distances.ndim != 2 or distances.shape[0] != distances.shape[1]:
+        raise ValueError(f"distances must be square; got shape={distances.shape}")
+    n = distances.shape[0]
+    if n < 2:
+        return np.asarray([], dtype=np.float64)
+    tri = distances[np.triu_indices(n, 1)]
+    return np.asarray(tri, dtype=np.float64)
+
+
+def threshold_by_gmm(pairwise_distances: np.ndarray, n_components: int = 2) -> float:
+    """
+    Fit a 2-component Gaussian Mixture to the 1D distance distribution and return
+    the intersection x where w1*N(mu1,s1) == w2*N(mu2,s2).
+    """
+    from sklearn.mixture import GaussianMixture
+    from scipy.optimize import brentq
+    from scipy.stats import norm
+
+    x = np.asarray(pairwise_distances, dtype=np.float64)
+    x = x[np.isfinite(x)]
+    if x.size < 10:
+        raise ValueError(f"Not enough pairwise distances for GMM: n={x.size}")
+
+    X = x.reshape(-1, 1)
+    gmm = GaussianMixture(
+        n_components=n_components,
+        covariance_type="full",
+        random_state=0,
+    )
+    gmm.fit(X)
+
+    means = gmm.means_.reshape(-1)
+    covs = gmm.covariances_.reshape(-1)
+    stds = np.sqrt(np.maximum(covs, 1e-12))
+    weights = gmm.weights_.reshape(-1)
+
+    if means.size != 2 or stds.size != 2 or weights.size != 2:
+        raise ValueError(
+            f"Expected 2 components; got means={means.shape}, stds={stds.shape}, weights={weights.shape}"
+        )
+
+    order = np.argsort(means)
+    means, stds, weights = means[order], stds[order], weights[order]
+
+    def pdf_diff(t: float) -> float:
+        return float(
+            weights[0] * norm.pdf(t, means[0], stds[0])
+            - weights[1] * norm.pdf(t, means[1], stds[1])
+        )
+
+    lo = float(means[0])
+    hi = float(means[1])
+
+    # Standard case: intersection between the two means.
+    f_lo = pdf_diff(lo)
+    f_hi = pdf_diff(hi)
+    if np.sign(f_lo) != np.sign(f_hi):
+        return float(brentq(pdf_diff, lo, hi))
+
+    # Robust fallback: find any sign change on a grid spanning the data.
+    x_min = float(np.min(x))
+    x_max = float(np.max(x))
+    grid = np.linspace(x_min, x_max, 256, dtype=np.float64)
+    vals = np.asarray([pdf_diff(float(t)) for t in grid], dtype=np.float64)
+    s = np.sign(vals)
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    if idx.size == 0:
+        raise ValueError("Failed to bracket GMM PDF intersection (no sign change found).")
+    a = float(grid[int(idx[0])])
+    b = float(grid[int(idx[0]) + 1])
+    return float(brentq(pdf_diff, a, b))
+
+
 def plot_graph(
     distances: np.ndarray,
     seeds: list,
@@ -77,15 +155,30 @@ def plot_graph(
     node_xy: np.ndarray,
     title: str,
     output_path: Path,
+    threshold_method: str = "mean",
 ) -> None:
     import plotly.graph_objects as go
     from plotly.colors import sample_colorscale
 
-    mean_threshold = float(np.mean(distances))
-    min_dist = float(np.min(distances))
-    max_dist = float(np.max(distances))
+    pairwise = pairwise_distances_upper(distances)
+    if pairwise.size == 0:
+        raise ValueError("Need at least 2 nodes to build a distance graph.")
 
-    graph = build_graph(distances, mean_threshold)
+    if threshold_method == "gmm":
+        try:
+            threshold = float(threshold_by_gmm(pairwise, n_components=2))
+        except Exception as e:
+            threshold = float(np.mean(pairwise))
+            print(f"[Warning] GMM threshold failed ({e}); fallback to mean={threshold:.6g}")
+    elif threshold_method == "mean":
+        threshold = float(np.mean(pairwise))
+    else:
+        raise ValueError(f"Unknown threshold_method={threshold_method!r} (expected 'mean' or 'gmm')")
+
+    min_dist = float(np.min(pairwise))
+    max_dist = float(np.max(pairwise))
+
+    graph = build_graph(distances, threshold)
     n = distances.shape[0]
     if node_xy.shape != (n, 2):
         raise ValueError(f"node_xy must have shape (n,2); got {node_xy.shape}")
@@ -195,6 +288,18 @@ def main() -> None:
         default=None,
         help="Only plot the specified case_id (omit to plot all).",
     )
+    parser.add_argument(
+        "--threshold-method",
+        type=str,
+        default="mean",
+        choices=["mean", "gmm"],
+        help=(
+            "How to choose the edge threshold. "
+            "'mean' uses the mean of upper-triangular pairwise distances; "
+            "'gmm' fits a 2-component GaussianMixture to pairwise distances and uses "
+            "the intersection of the two weighted Gaussian PDFs (fallbacks to mean on failure)."
+        ),
+    )
     args = parser.parse_args()
 
     embeddings_dir = Path(args.embeddings_dir)
@@ -269,7 +374,16 @@ def main() -> None:
         )
         # Avoid clobbering heatmap outputs that use the same base name.
         output_path = dist_path.with_name(f"{dist_path.stem}_graph.html")
-        plot_graph(distances, seeds, node_returns, node_xy, title, output_path)
+        title2 = title.replace("mean threshold", f"{args.threshold_method} threshold")
+        plot_graph(
+            distances,
+            seeds,
+            node_returns,
+            node_xy,
+            title2,
+            output_path,
+            threshold_method=args.threshold_method,
+        )
         print(f"Saved: {output_path}")
 
 
