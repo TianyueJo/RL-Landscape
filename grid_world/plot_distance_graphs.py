@@ -89,63 +89,158 @@ def threshold_by_gmm(pairwise_distances: np.ndarray, n_components: int = 2) -> f
     Fit a 2-component Gaussian Mixture to the 1D distance distribution and return
     the intersection x where w1*N(mu1,s1) == w2*N(mu2,s2).
     """
-    from sklearn.mixture import GaussianMixture
-    from scipy.optimize import brentq
-    from scipy.stats import norm
+    if int(n_components) != 2:
+        raise ValueError("Only n_components=2 is supported.")
 
     x = np.asarray(pairwise_distances, dtype=np.float64)
     x = x[np.isfinite(x)]
     if x.size < 10:
         raise ValueError(f"Not enough pairwise distances for GMM: n={x.size}")
 
-    X = x.reshape(-1, 1)
-    gmm = GaussianMixture(
-        n_components=n_components,
-        covariance_type="full",
-        random_state=0,
-    )
-    gmm.fit(X)
+    def normal_pdf(xx: np.ndarray, mu: float, sigma: float) -> np.ndarray:
+        s = float(max(sigma, 1e-12))
+        z = (xx - float(mu)) / s
+        return np.exp(-0.5 * z * z) / (s * np.sqrt(2.0 * np.pi))
 
-    means = gmm.means_.reshape(-1)
-    covs = gmm.covariances_.reshape(-1)
-    stds = np.sqrt(np.maximum(covs, 1e-12))
-    weights = gmm.weights_.reshape(-1)
+    def fit_gmm_1d_em(
+        xx: np.ndarray, max_iter: int = 200, tol: float = 1e-8
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """
+        Pure NumPy EM for 1D 2-component Gaussian mixture.
+        Returns (weights, means, stds), each shape (2,).
+        """
+        rng = np.random.default_rng(0)
+        xx = np.asarray(xx, dtype=np.float64)
+        n = xx.size
 
-    if means.size != 2 or stds.size != 2 or weights.size != 2:
-        raise ValueError(
-            f"Expected 2 components; got means={means.shape}, stds={stds.shape}, weights={weights.shape}"
+        # init means by percentiles (more stable than random)
+        m0, m1 = np.percentile(xx, [25, 75]).astype(np.float64)
+        if not np.isfinite(m0) or not np.isfinite(m1) or float(m0) == float(m1):
+            m0 = float(np.min(xx))
+            m1 = float(np.max(xx))
+            if float(m0) == float(m1):
+                m0 -= 1e-3
+                m1 += 1e-3
+
+        means = np.array([m0, m1], dtype=np.float64)
+        s = float(np.std(xx))
+        if not np.isfinite(s) or s <= 0:
+            s = 1.0
+        stds = np.array([s, s], dtype=np.float64)
+        weights = np.array([0.5, 0.5], dtype=np.float64)
+
+        prev_ll = -np.inf
+        for _ in range(int(max_iter)):
+            # E-step
+            p0 = weights[0] * normal_pdf(xx, means[0], stds[0])
+            p1 = weights[1] * normal_pdf(xx, means[1], stds[1])
+            denom = p0 + p1 + 1e-300
+            r0 = p0 / denom
+            r1 = p1 / denom
+
+            # M-step
+            n0 = float(np.sum(r0))
+            n1 = float(np.sum(r1))
+            if n0 <= 1e-12 or n1 <= 1e-12:
+                # degenerate: re-seed slightly and continue
+                means = means + rng.normal(0.0, 1e-3, size=2)
+                stds = np.maximum(stds, 1e-3)
+                weights = np.array([0.5, 0.5], dtype=np.float64)
+                continue
+
+            weights = np.array([n0 / n, n1 / n], dtype=np.float64)
+            means = np.array(
+                [np.sum(r0 * xx) / n0, np.sum(r1 * xx) / n1], dtype=np.float64
+            )
+            v0 = np.sum(r0 * (xx - means[0]) ** 2) / n0
+            v1 = np.sum(r1 * (xx - means[1]) ** 2) / n1
+            stds = np.sqrt(np.maximum([v0, v1], 1e-12)).astype(np.float64)
+
+            # log-likelihood for convergence
+            mix = (
+                weights[0] * normal_pdf(xx, means[0], stds[0])
+                + weights[1] * normal_pdf(xx, means[1], stds[1])
+                + 1e-300
+            )
+            ll = float(np.sum(np.log(mix)))
+            if abs(ll - prev_ll) < float(tol) * (1.0 + abs(prev_ll)):
+                break
+            prev_ll = ll
+
+        return weights, means, stds
+
+    def intersection_of_weighted_normals(
+        w0: float, m0: float, s0: float, w1: float, m1: float, s1: float
+    ) -> float:
+        """
+        Solve w0*N(m0,s0) == w1*N(m1,s1) analytically.
+        Returns a threshold, preferring a root between m0 and m1.
+        """
+        s0 = float(max(s0, 1e-12))
+        s1 = float(max(s1, 1e-12))
+        w0 = float(max(w0, 1e-300))
+        w1 = float(max(w1, 1e-300))
+
+        # Solve:
+        # log(w0) - log(s0) - (x-m0)^2/(2s0^2) = log(w1) - log(s1) - (x-m1)^2/(2s1^2)
+        a = (1.0 / (2.0 * s1 * s1)) - (1.0 / (2.0 * s0 * s0))
+        b = (m0 / (s0 * s0)) - (m1 / (s1 * s1))
+        c = (
+            (m1 * m1) / (2.0 * s1 * s1)
+            - (m0 * m0) / (2.0 * s0 * s0)
+            + np.log(w1) - np.log(w0)
+            + np.log(s0) - np.log(s1)
         )
 
+        if abs(a) < 1e-14:
+            # linear
+            if abs(b) < 1e-14:
+                return float(0.5 * (m0 + m1))
+            return float(-c / b)
+
+        disc = b * b - 4.0 * a * c
+        disc = float(max(disc, 0.0))
+        rdisc = float(np.sqrt(disc))
+        x1 = (-b - rdisc) / (2.0 * a)
+        x2 = (-b + rdisc) / (2.0 * a)
+
+        lo = float(min(m0, m1))
+        hi = float(max(m0, m1))
+        cand = []
+        for xx in (x1, x2):
+            if np.isfinite(xx):
+                cand.append(float(xx))
+        if not cand:
+            return float(0.5 * (m0 + m1))
+
+        between = [xx for xx in cand if lo <= xx <= hi]
+        if between:
+            # if two, pick the one closer to the midpoint
+            mid = 0.5 * (lo + hi)
+            return float(min(between, key=lambda t: abs(t - mid)))
+
+        # otherwise pick the root closest to the interval
+        def dist_to_interval(t: float) -> float:
+            if t < lo:
+                return lo - t
+            if t > hi:
+                return t - hi
+            return 0.0
+
+        return float(min(cand, key=dist_to_interval))
+
+    weights, means, stds = fit_gmm_1d_em(x)
     order = np.argsort(means)
-    means, stds, weights = means[order], stds[order], weights[order]
+    weights, means, stds = weights[order], means[order], stds[order]
 
-    def pdf_diff(t: float) -> float:
-        return float(
-            weights[0] * norm.pdf(t, means[0], stds[0])
-            - weights[1] * norm.pdf(t, means[1], stds[1])
-        )
-
-    lo = float(means[0])
-    hi = float(means[1])
-
-    # Standard case: intersection between the two means.
-    f_lo = pdf_diff(lo)
-    f_hi = pdf_diff(hi)
-    if np.sign(f_lo) != np.sign(f_hi):
-        return float(brentq(pdf_diff, lo, hi))
-
-    # Robust fallback: find any sign change on a grid spanning the data.
-    x_min = float(np.min(x))
-    x_max = float(np.max(x))
-    grid = np.linspace(x_min, x_max, 256, dtype=np.float64)
-    vals = np.asarray([pdf_diff(float(t)) for t in grid], dtype=np.float64)
-    s = np.sign(vals)
-    idx = np.where(s[:-1] * s[1:] < 0)[0]
-    if idx.size == 0:
-        raise ValueError("Failed to bracket GMM PDF intersection (no sign change found).")
-    a = float(grid[int(idx[0])])
-    b = float(grid[int(idx[0]) + 1])
-    return float(brentq(pdf_diff, a, b))
+    return intersection_of_weighted_normals(
+        float(weights[0]),
+        float(means[0]),
+        float(stds[0]),
+        float(weights[1]),
+        float(means[1]),
+        float(stds[1]),
+    )
 
 
 def plot_graph(
@@ -373,7 +468,13 @@ def main() -> None:
             f"{str(method).upper()} dim={dim} case={case_id}"
         )
         # Avoid clobbering heatmap outputs that use the same base name.
-        output_path = dist_path.with_name(f"{dist_path.stem}_graph.html")
+        # Also avoid overwriting prior graph outputs when switching threshold methods.
+        if args.threshold_method == "mean":
+            output_path = dist_path.with_name(f"{dist_path.stem}_graph.html")
+        else:
+            output_path = dist_path.with_name(
+                f"{dist_path.stem}_{args.threshold_method}_graph.html"
+            )
         title2 = title.replace("mean threshold", f"{args.threshold_method} threshold")
         plot_graph(
             distances,
