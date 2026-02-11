@@ -34,7 +34,16 @@ import pufferlib.pytorch
 try:
     from pufferlib import _C
 except ImportError:
-    raise ImportError('Failed to import C/CUDA advantage kernel. If you have non-default PyTorch, try installing with --no-build-isolation')
+    # NOTE:
+    # The C/CUDA advantage kernel is only required for training performance.
+    # For lightweight inference / evaluation utilities (e.g., loading env/policy),
+    # we allow importing pufferlib.pufferl without the compiled extension.
+    _C = None
+    warnings.warn(
+        "pufferlib._C not available; training-speed advantage kernel disabled. "
+        "Inference/evaluation utilities should still work.",
+        category=ImportWarning,
+    )
 
 import rich
 import rich.traceback
