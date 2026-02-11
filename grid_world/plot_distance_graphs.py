@@ -102,9 +102,7 @@ def threshold_by_gmm(pairwise_distances: np.ndarray, n_components: int = 2) -> f
         z = (xx - float(mu)) / s
         return np.exp(-0.5 * z * z) / (s * np.sqrt(2.0 * np.pi))
 
-    def fit_gmm_1d_em(
-        xx: np.ndarray, max_iter: int = 200, tol: float = 1e-8
-    ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    def fit_gmm_1d_em(xx: np.ndarray, max_iter: int = 200, tol: float = 1e-8) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         """
         Pure NumPy EM for 1D 2-component Gaussian mixture.
         Returns (weights, means, stds), each shape (2,).
@@ -251,6 +249,8 @@ def plot_graph(
     title: str,
     output_path: Path,
     threshold_method: str = "mean",
+    image_scale: float = 2.0,
+    distance_label: str = "L2",
 ) -> None:
     import plotly.graph_objects as go
     from plotly.colors import sample_colorscale
@@ -307,7 +307,7 @@ def plot_graph(
             cmin=min_dist,
             cmax=max_dist,
             colorbar=dict(
-                title="L2 Distance",
+                title=f"{distance_label} Distance",
                 titleside="right",
                 x=1.02,
                 y=0.5,
@@ -356,14 +356,18 @@ def plot_graph(
         height=780,
         margin=dict(l=20, r=20, t=60, b=20),
     )
-    fig.write_html(str(output_path))
+    if output_path.suffix.lower() == ".html":
+        fig.write_html(str(output_path))
+    else:
+        # Requires kaleido: `pip install kaleido`
+        fig.write_image(str(output_path), scale=float(image_scale))
 
 
 def main() -> None:
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Plot distance graphs from *_l2_dist.json (HTML)."
+        description="Plot distance graphs from *_{l1,l2}_dist.json (HTML/PNG/SVG/PDF/JPG)."
     )
     parser.add_argument(
         "--embeddings-dir",
@@ -395,6 +399,19 @@ def main() -> None:
             "the intersection of the two weighted Gaussian PDFs (fallbacks to mean on failure)."
         ),
     )
+    parser.add_argument(
+        "--output-format",
+        type=str,
+        default="html",
+        choices=["html", "png", "svg", "pdf", "jpg", "jpeg"],
+        help="Output format. Non-HTML formats require kaleido.",
+    )
+    parser.add_argument(
+        "--image-scale",
+        type=float,
+        default=2.0,
+        help="Scale factor for raster image export (e.g., png/jpg).",
+    )
     args = parser.parse_args()
 
     embeddings_dir = Path(args.embeddings_dir)
@@ -407,7 +424,7 @@ def main() -> None:
 
     eval_returns = load_eval_returns(eval_path)
 
-    dist_files = sorted(embeddings_dir.glob("*_l2_dist.json"))
+    dist_files = sorted(embeddings_dir.glob("*_l*_dist.json"))
     if not dist_files:
         raise FileNotFoundError(f"No distance matrix files in {embeddings_dir}")
 
@@ -463,17 +480,30 @@ def main() -> None:
             node_xy.append(pos_map[int(seed)])
         node_xy = np.asarray(node_xy, dtype=np.float64)
 
+        # Determine distance label from file name / payload
+        norm = payload.get("distance_norm")
+        if norm is None:
+            if "_l1_dist" in dist_path.stem:
+                norm = "l1"
+            elif "_l2_dist" in dist_path.stem:
+                norm = "l2"
+        distance_label = "L1" if str(norm).lower() == "l1" else "L2"
+
         title = (
-            f"Distance Graph (L2, mean threshold; node pos=PCA2) - "
+            f"Distance Graph ({distance_label}, mean threshold; node pos=PCA2) - "
             f"{str(method).upper()} dim={dim} case={case_id}"
         )
         # Avoid clobbering heatmap outputs that use the same base name.
         # Also avoid overwriting prior graph outputs when switching threshold methods.
+        ext = str(args.output_format).lower()
+        if ext == "jpeg":
+            ext = "jpg"
+        suffix = f".{ext}"
         if args.threshold_method == "mean":
-            output_path = dist_path.with_name(f"{dist_path.stem}_graph.html")
+            output_path = dist_path.with_name(f"{dist_path.stem}_graph{suffix}")
         else:
             output_path = dist_path.with_name(
-                f"{dist_path.stem}_{args.threshold_method}_graph.html"
+                f"{dist_path.stem}_{args.threshold_method}_graph{suffix}"
             )
         title2 = title.replace("mean threshold", f"{args.threshold_method} threshold")
         plot_graph(
@@ -484,6 +514,8 @@ def main() -> None:
             title2,
             output_path,
             threshold_method=args.threshold_method,
+            image_scale=args.image_scale,
+            distance_label=distance_label,
         )
         print(f"Saved: {output_path}")
 

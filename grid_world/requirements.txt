@@ -15,8 +15,11 @@ gymnasium==0.29.1
 # Analysis / plotting
 matplotlib>=3.8.0
 plotly>=5.20.0
+kaleido==0.2.1
 networkx>=3.2
 scikit-learn>=1.4.0
-scipy>=1.11.0
+
+
+
 
 
