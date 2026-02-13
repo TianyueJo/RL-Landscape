@@ -28,7 +28,7 @@ echo "=========================================="
 python3 compute_behavior_embeddings.py \
     --models-dir /mnt/home/tianyuez/landscape-v2/grid_world/models \
     --output-dir /mnt/home/tianyuez/landscape-v2/grid_world/behavior_space_embeddings \
-    --case-ids 3 \
+    --case-ids 1 2 3 \
     --dims 2 3 6 9 12 \
     --device cpu \
     --n-episodes-per-policy 10 \

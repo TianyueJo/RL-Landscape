@@ -5,11 +5,11 @@ import numpy as np
 import networkx as nx
 
 
-def load_eval_returns(eval_path: Path) -> dict:
+def load_eval_data(eval_path: Path) -> dict:
     with eval_path.open("r", encoding="utf-8") as f:
         data = json.load(f)
 
-    eval_returns = {}
+    eval_data: dict[int, dict[int, dict]] = {}
     for case_key, case_data in data.items():
         # evaluation JSON may contain metadata keys (e.g., "action_mode").
         if not isinstance(case_key, str) or not case_key.startswith("case_"):
@@ -18,12 +18,19 @@ def load_eval_returns(eval_path: Path) -> dict:
         if len(parts) != 2 or not parts[1].isdigit():
             continue
         case_id = int(parts[1])
-        case_map = {}
+        case_map: dict[int, dict] = {}
         for seed_key, seed_data in case_data.get("seeds_data", {}).items():
             seed = int(seed_key.split("_")[1])
-            case_map[seed] = float(seed_data["mean_return"])
-        eval_returns[case_id] = case_map
-    return eval_returns
+            case_map[seed] = {
+                "mean_return": float(seed_data.get("mean_return", 0.0)),
+                "std_return": float(seed_data.get("std_return", 0.0)),
+                "success_rate": float(seed_data.get("success_rate", 0.0)),
+                # Optional (added later): end-position stats
+                "most_common_end_position": seed_data.get("most_common_end_position", None),
+                "end_position_counts": seed_data.get("end_position_counts", None),
+            }
+        eval_data[case_id] = case_map
+    return eval_data
 
 
 def load_pca2_positions(embeddings_dir: Path, case_id: int) -> dict:
@@ -245,15 +252,20 @@ def plot_graph(
     distances: np.ndarray,
     seeds: list,
     node_returns: list,
+    node_endpoints: list | None,
+    node_success_rates: list | None,
+    node_endpoint_counts: list | None,
     node_xy: np.ndarray,
     title: str,
     output_path: Path,
     threshold_method: str = "mean",
     image_scale: float = 2.0,
     distance_label: str = "L2",
+    color_by: str = "return",
 ) -> None:
     import plotly.graph_objects as go
     from plotly.colors import sample_colorscale
+    from plotly.colors import qualitative
 
     pairwise = pairwise_distances_upper(distances)
     if pairwise.size == 0:
@@ -321,33 +333,242 @@ def plot_graph(
         hoverinfo="none",
     )
 
-    node_trace = go.Scatter(
-        x=x,
-        y=y,
-        mode="markers+text",
-        text=[f"S{seed}" for seed in seeds],
-        textposition="top center",
-        marker=dict(
-            size=18,
-            color=node_returns,
-            colorscale="Plasma",
-            colorbar=dict(
-                title="Mean Return",
-                titleside="right",
-                x=1.14,
-                y=0.5,
-                len=0.7,
-                thickness=14,
-                titlefont=dict(size=11),
-                tickfont=dict(size=10),
+    node_traces = []
+    if color_by == "return":
+        node_trace = go.Scatter(
+            x=x,
+            y=y,
+            mode="markers+text",
+            text=[f"S{seed}" for seed in seeds],
+            textposition="top center",
+            marker=dict(
+                size=18,
+                color=node_returns,
+                colorscale="Plasma",
+                colorbar=dict(
+                    title="Mean Return",
+                    titleside="right",
+                    x=1.14,
+                    y=0.5,
+                    len=0.7,
+                    thickness=14,
+                    titlefont=dict(size=11),
+                    tickfont=dict(size=10),
+                ),
+                line=dict(width=1, color="black"),
             ),
-            line=dict(width=1, color="black"),
-        ),
-        hovertemplate="Seed: %{text}<br>Return: %{marker.color:.2f}<extra></extra>",
-        showlegend=False,
-    )
+            hovertemplate="Seed: %{text}<br>Return: %{marker.color:.2f}<extra></extra>",
+            showlegend=False,
+        )
+        node_traces.append(node_trace)
+    elif color_by == "endpoint":
+        if node_endpoints is None:
+            raise ValueError("color_by='endpoint' requires node_endpoints.")
+        if node_success_rates is None:
+            node_success_rates = [None] * len(seeds)
 
-    fig = go.Figure(data=edge_traces + [edge_colorbar_trace, node_trace])
+        # Assign a discrete color to each distinct endpoint label.
+        # Endpoint label format: "x,y" (or "unknown").
+        endpoints = [str(e) if e is not None else "unknown" for e in node_endpoints]
+        uniq = sorted(set(endpoints))
+        palette = list(qualitative.Dark24) + list(qualitative.Set3) + list(qualitative.Plotly)
+        color_map = {ep: palette[i % len(palette)] for i, ep in enumerate(uniq)}
+
+        # Create one trace per endpoint to get a legend.
+        seed_labels = [f"S{seed}" for seed in seeds]
+        for ep in uniq:
+            idx = [i for i, e in enumerate(endpoints) if e == ep]
+            if not idx:
+                continue
+            hovertext = []
+            for i in idx:
+                ret = float(node_returns[i]) if node_returns is not None else float("nan")
+                sr = node_success_rates[i]
+                if sr is None:
+                    hovertext.append(
+                        f"Seed: {seed_labels[i]}<br>Return: {ret:.2f}<br>End: {ep}"
+                    )
+                else:
+                    hovertext.append(
+                        f"Seed: {seed_labels[i]}<br>Return: {ret:.2f}<br>End: {ep}<br>Success: {float(sr)*100:.1f}%"
+                    )
+
+            node_traces.append(
+                go.Scatter(
+                    x=[x[i] for i in idx],
+                    y=[y[i] for i in idx],
+                    mode="markers+text",
+                    text=[seed_labels[i] for i in idx],
+                    textposition="top center",
+                    marker=dict(
+                        size=18,
+                        color=color_map[ep],
+                        line=dict(width=1, color="black"),
+                    ),
+                    name=f"End {ep}",
+                    hoverinfo="text",
+                    hovertext=hovertext,
+                    showlegend=True,
+                )
+            )
+    elif color_by == "endpoint_pie":
+        # Endpoint distribution as per-node pie charts (uses end_position_counts)
+        if node_endpoint_counts is None:
+            raise ValueError("color_by='endpoint_pie' requires node_endpoint_counts.")
+
+        # Collect global endpoint labels for consistent colors
+        global_labels = set()
+        for c in node_endpoint_counts:
+            if isinstance(c, dict):
+                for k in c.keys():
+                    if isinstance(k, str) and k.strip():
+                        global_labels.add(k.strip())
+        if not global_labels:
+            global_labels = {"unknown"}
+        uniq = sorted(global_labels)
+        palette = list(qualitative.Dark24) + list(qualitative.Set3) + list(qualitative.Plotly)
+        color_map = {ep: palette[i % len(palette)] for i, ep in enumerate(uniq)}
+
+        # Build base figure: edges + edge colorbar
+        fig = go.Figure(data=edge_traces + [edge_colorbar_trace])
+
+        # Set axis ranges (so we can map data coords -> paper coords for pie domains)
+        xmin = float(np.min(x))
+        xmax = float(np.max(x))
+        ymin = float(np.min(y))
+        ymax = float(np.max(y))
+        if xmax == xmin:
+            xmax = xmin + 1.0
+        if ymax == ymin:
+            ymax = ymin + 1.0
+        pad_x = 0.05 * (xmax - xmin)
+        pad_y = 0.05 * (ymax - ymin)
+        xmin -= pad_x
+        xmax += pad_x
+        ymin -= pad_y
+        ymax += pad_y
+
+        # Legend (one entry per endpoint label)
+        for ep in uniq:
+            fig.add_trace(
+                go.Scatter(
+                    x=[None],
+                    y=[None],
+                    mode="markers",
+                    marker=dict(size=10, color=color_map[ep], line=dict(width=1, color="black")),
+                    name=f"End {ep}",
+                    showlegend=True,
+                    hoverinfo="none",
+                )
+            )
+
+        # Add a small pie chart at each node using normalized paper coordinates
+        pie_size = 0.06  # in [0,1] paper coords
+        seed_labels = [f"S{seed}" for seed in seeds]
+        for i in range(len(seeds)):
+            counts = node_endpoint_counts[i] if i < len(node_endpoint_counts) else None
+            if not isinstance(counts, dict) or not counts:
+                counts = {"unknown": 1}
+
+            labels = []
+            values = []
+            for k, v in counts.items():
+                if v is None:
+                    continue
+                try:
+                    vv = int(v)
+                except Exception:
+                    continue
+                if vv <= 0:
+                    continue
+                kk = str(k).strip() if k is not None else "unknown"
+                if not kk:
+                    kk = "unknown"
+                labels.append(kk)
+                values.append(vv)
+            if not labels:
+                labels = ["unknown"]
+                values = [1]
+
+            px = (float(x[i]) - xmin) / (xmax - xmin)
+            py = (float(y[i]) - ymin) / (ymax - ymin)
+            x0 = max(0.0, px - pie_size / 2.0)
+            x1 = min(1.0, px + pie_size / 2.0)
+            y0 = max(0.0, py - pie_size / 2.0)
+            y1 = min(1.0, py + pie_size / 2.0)
+
+            ret = float(node_returns[i]) if node_returns is not None else float("nan")
+            sr = None
+            if node_success_rates is not None and i < len(node_success_rates):
+                sr = float(node_success_rates[i])
+
+            # One customdata row per slice
+            custom = []
+            for _ in labels:
+                custom.append([seed_labels[i], ret, sr])
+
+            fig.add_trace(
+                go.Pie(
+                    labels=labels,
+                    values=values,
+                    domain=dict(x=[x0, x1], y=[y0, y1]),
+                    sort=False,
+                    direction="clockwise",
+                    textinfo="none",
+                    showlegend=False,
+                    marker=dict(colors=[color_map.get(l, "#999999") for l in labels], line=dict(width=1, color="black")),
+                    customdata=custom,
+                    hovertemplate=(
+                        "Seed: %{customdata[0]}<br>"
+                        "Return: %{customdata[1]:.2f}<br>"
+                        "End: %{label}<br>"
+                        "Count: %{value}<br>"
+                        "Success: %{customdata[2]:.3f}<extra></extra>"
+                    ),
+                )
+            )
+
+        # Seed labels on top (data coords)
+        fig.add_trace(
+            go.Scatter(
+                x=x,
+                y=y,
+                mode="text",
+                text=seed_labels,
+                textposition="top center",
+                showlegend=False,
+                hoverinfo="skip",
+            )
+        )
+
+        fig.update_layout(
+            title=title,
+            xaxis=dict(visible=False, range=[xmin, xmax]),
+            yaxis=dict(visible=False, range=[ymin, ymax]),
+            width=900,
+            height=820,
+            margin=dict(l=20, r=20, t=60, b=20),
+            legend=dict(
+                x=1.02,
+                y=0.98,
+                xanchor="left",
+                yanchor="top",
+                font=dict(size=10),
+                bgcolor="rgba(255,255,255,0.6)",
+            ),
+        )
+
+        if output_path.suffix.lower() == ".html":
+            fig.write_html(str(output_path))
+        else:
+            fig.write_image(str(output_path), scale=float(image_scale))
+        return
+    else:
+        raise ValueError(
+            f"Unknown color_by={color_by!r} (expected 'return' or 'endpoint' or 'endpoint_pie')"
+        )
+
+    fig = go.Figure(data=edge_traces + [edge_colorbar_trace] + node_traces)
     fig.update_layout(
         title=title,
         xaxis=dict(visible=False),
@@ -388,6 +609,19 @@ def main() -> None:
         help="Only plot the specified case_id (omit to plot all).",
     )
     parser.add_argument(
+        "--only-dim",
+        type=int,
+        default=None,
+        help="Only plot distance files with this embedding dimension (e.g., 9).",
+    )
+    parser.add_argument(
+        "--only-norm",
+        type=str,
+        default=None,
+        choices=[None, "l1", "l2"],
+        help="Only plot distance files with this distance norm (l1 or l2).",
+    )
+    parser.add_argument(
         "--threshold-method",
         type=str,
         default="mean",
@@ -412,17 +646,43 @@ def main() -> None:
         default=2.0,
         help="Scale factor for raster image export (e.g., png/jpg).",
     )
+    parser.add_argument(
+        "--color-by",
+        type=str,
+        default="return",
+        choices=["return", "endpoint", "endpoint_pie"],
+        help=(
+            "Node color rule: "
+            "'return' (mean return), "
+            "'endpoint' (most common end position), "
+            "'endpoint_pie' (pie chart of end_position_counts)."
+        ),
+    )
+    parser.add_argument(
+        "--only-method",
+        type=str,
+        default=None,
+        choices=[None, "pca", "tsne"],
+        help="Only plot distance files with this embedding method (pca or tsne).",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        default=None,
+        help="If provided, save all outputs to this directory (instead of alongside the input JSON).",
+    )
     args = parser.parse_args()
 
     embeddings_dir = Path(args.embeddings_dir)
     eval_path = Path(args.eval_path)
+    output_dir = Path(args.output_dir) if args.output_dir else None
 
     if not embeddings_dir.exists():
         raise FileNotFoundError(f"Missing directory: {embeddings_dir}")
     if not eval_path.exists():
         raise FileNotFoundError(f"Missing evaluation file: {eval_path}")
 
-    eval_returns = load_eval_returns(eval_path)
+    eval_data = load_eval_data(eval_path)
 
     dist_files = sorted(embeddings_dir.glob("*_l*_dist.json"))
     if not dist_files:
@@ -443,11 +703,15 @@ def main() -> None:
 
         if args.case_id is not None and int(case_id) != int(args.case_id):
             continue
+        if args.only_dim is not None and int(dim) != int(args.only_dim):
+            continue
+        if args.only_method is not None and str(method).lower() != str(args.only_method).lower():
+            continue
 
         if distances.ndim != 2 or distances.shape[0] != distances.shape[1]:
             raise ValueError(f"Invalid distance matrix in {dist_path}")
 
-        if case_id not in eval_returns:
+        if case_id not in eval_data:
             raise ValueError(f"Missing case {case_id} in evaluation results")
 
         if case_id not in pca2_pos_by_case:
@@ -464,11 +728,39 @@ def main() -> None:
                 f"(required for node positions)."
             )
 
+        # Determine distance norm from payload / filename and filter if requested
+        norm = payload.get("distance_norm")
+        if norm is None:
+            if "_l1_dist" in dist_path.stem:
+                norm = "l1"
+            elif "_l2_dist" in dist_path.stem:
+                norm = "l2"
+        norm_str = str(norm).lower() if norm is not None else "l2"
+        if args.only_norm is not None and norm_str != str(args.only_norm).lower():
+            continue
+
         node_returns = []
+        node_endpoints = []
+        node_success_rates = []
+        node_endpoint_counts = []
         for seed in seeds:
-            if seed not in eval_returns[case_id]:
+            if seed not in eval_data[case_id]:
                 raise ValueError(f"Missing seed {seed} eval data for case {case_id}")
-            node_returns.append(eval_returns[case_id][seed])
+            sd = eval_data[case_id][seed]
+            node_returns.append(float(sd.get("mean_return", 0.0)))
+            node_success_rates.append(float(sd.get("success_rate", 0.0)))
+            endp = sd.get("most_common_end_position", None)
+            if isinstance(endp, (list, tuple)) and len(endp) == 2:
+                node_endpoints.append(f"{int(endp[0])},{int(endp[1])}")
+            elif isinstance(endp, str) and endp.strip():
+                node_endpoints.append(endp.strip())
+            else:
+                node_endpoints.append("unknown")
+            epc = sd.get("end_position_counts", None)
+            if isinstance(epc, dict) and epc:
+                node_endpoint_counts.append(epc)
+            else:
+                node_endpoint_counts.append({"unknown": 1})
 
         # Align PCA-2D positions to the seeds order of this distance matrix.
         node_xy = []
@@ -480,42 +772,38 @@ def main() -> None:
             node_xy.append(pos_map[int(seed)])
         node_xy = np.asarray(node_xy, dtype=np.float64)
 
-        # Determine distance label from file name / payload
-        norm = payload.get("distance_norm")
-        if norm is None:
-            if "_l1_dist" in dist_path.stem:
-                norm = "l1"
-            elif "_l2_dist" in dist_path.stem:
-                norm = "l2"
-        distance_label = "L1" if str(norm).lower() == "l1" else "L2"
+        distance_label = "L1" if norm_str == "l1" else "L2"
 
         title = (
-            f"Distance Graph ({distance_label}, mean threshold; node pos=PCA2) - "
+            f"Distance Graph ({distance_label}, {args.threshold_method} threshold; node pos=PCA2; node color={args.color_by}) - "
             f"{str(method).upper()} dim={dim} case={case_id}"
         )
-        # Avoid clobbering heatmap outputs that use the same base name.
-        # Also avoid overwriting prior graph outputs when switching threshold methods.
         ext = str(args.output_format).lower()
         if ext == "jpeg":
             ext = "jpg"
         suffix = f".{ext}"
-        if args.threshold_method == "mean":
-            output_path = dist_path.with_name(f"{dist_path.stem}_graph{suffix}")
+
+        out_base = f"{dist_path.stem}_{args.threshold_method}_graph_{args.color_by}{suffix}"
+        if output_dir is None:
+            output_path = dist_path.with_name(out_base)
         else:
-            output_path = dist_path.with_name(
-                f"{dist_path.stem}_{args.threshold_method}_graph{suffix}"
-            )
-        title2 = title.replace("mean threshold", f"{args.threshold_method} threshold")
+            output_dir.mkdir(parents=True, exist_ok=True)
+            output_path = output_dir / out_base
+
         plot_graph(
             distances,
             seeds,
             node_returns,
+            node_endpoints if args.color_by == "endpoint" else None,
+            node_success_rates if args.color_by == "endpoint" else None,
+            node_endpoint_counts if args.color_by == "endpoint_pie" else None,
             node_xy,
-            title2,
+            title,
             output_path,
             threshold_method=args.threshold_method,
             image_scale=args.image_scale,
             distance_label=distance_label,
+            color_by=args.color_by,
         )
         print(f"Saved: {output_path}")
 

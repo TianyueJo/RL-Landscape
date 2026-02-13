@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GridWorld Environment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .grid {
+            display: inline-block;
+            border: 2px solid #333;
+            margin: 20px auto;
+            font-family: monospace;
+        }
+        .grid-row {
+            display: flex;
+        }
+        .grid-cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            border: 1px solid #ddd;
+        }
+        .cell-empty { background-color: #fff; }
+        .cell-wall { background-color: #333; color: white; }
+        .cell-start { background-color: #4CAF50; color: white; }
+        .cell-goal { background-color: #f44336; color: white; }
+        .cell-candy { background-color: #FFEB3B; color: #333; }
+        .cell-risk { background-color: #FF9800; color: white; }
+        .info {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .info h2 {
+            margin-top: 0;
+            color: #555;
+        }
+        .info-item {
+            margin: 5px 0;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GridWorld Environment (11×11)</h1>
+        
+        <div style="text-align: center;">
+            <div class="grid">
+                <div class="grid-row">
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-candy">C</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-goal">G</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-candy">C</div>
+                    <div class="grid-cell cell-wall">#</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-candy">C</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-candy">C</div>
+                    <div class="grid-cell cell-wall">#</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-start">S</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-empty">.</div>
+                    <div class="grid-cell cell-wall">#</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                    <div class="grid-cell cell-wall">#</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color cell-start"></div>
+                <span>Start (S)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color cell-goal"></div>
+                <span>Goal (G)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color cell-candy"></div>
+                <span>Candy (C)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color cell-wall"></div>
+                <span>Wall (#)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color cell-empty"></div>
+                <span>Empty (.)</span>
+            </div>
+        </div>
+        
+        <div class="info">
+            <h2>Environment Configuration</h2>
+            <div class="info-item"><strong>Start Position:</strong> (5, 9)</div>
+            <div class="info-item"><strong>Goal Position:</strong> (5, 1)</div>
+            <div class="info-item"><strong>Candy Position:</strong> (1, 7)</div>
+            <div class="info-item"><strong>Goal Reward:</strong> 10.0</div>
+            <div class="info-item"><strong>Candy Reward:</strong> 8.0</div>
+            <div class="info-item"><strong>Step Penalty:</strong> -0.01</div>
+            <div class="info-item"><strong>Max Steps:</strong> 80</div>
+        </div>
+    </div>
+</body>
+</html>
